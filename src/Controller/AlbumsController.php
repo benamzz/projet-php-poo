@@ -4,14 +4,14 @@
 namespace App\Controller;
 
 use App\Connection;
-use App\QueryBuilder;
+use App\AbstractQueryBuilder;
 use App\Controller\AlbumsController;
 use App\Repository\AbstractRepository;
 
 
 
 
-class AlbumsController {
+class AlbumsController{
     protected $db;
     protected $table;
     protected $queryBuilder;
@@ -19,7 +19,7 @@ class AlbumsController {
     public function __construct()
     {
         $this->db = Connection::getConnection();
-        $this->queryBuilder = new QueryBuilder();
+        $this->queryBuilder = new AbstractQueryBuilder();
     }
 
     public function findAll(): array

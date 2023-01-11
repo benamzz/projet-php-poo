@@ -13,5 +13,8 @@ final class Albums extends AbstractAlbums{
     {   
         $this->createdAt = new DateTime("now", new \DateTimeZone("Europe/Paris"));
     }
-
+    public function getDate()
+    {
+        return $this->createdAt;
+    }
 }

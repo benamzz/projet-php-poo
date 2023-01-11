@@ -3,7 +3,7 @@
 namespace App;
 
 use App\Connection;
-use App\QueryBuilder;
+
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
@@ -11,7 +11,7 @@ require_once __DIR__ . '/../vendor/autoload.php';
  * 
  * la classe qui se charge de faire des requetes SQL
  */
-abstract class QueryBuilder { 
+abstract class AbstractQueryBuilder { 
 
     private $connection;
     protected $table;
@@ -30,10 +30,10 @@ abstract class QueryBuilder {
         return $this->connection->query($sql)->fetch_all();
     }
 
-    public function insert(string $title, string $author, string $img, bool $enVente)
+    public function insert(string $title, string $author)
     {
-        $query = $this->connection->prepare("INSERT INTO messages SET  title = :title, author = :author, img = :img, enVente = :enVente, created_at = NOW()");
-        $query->execute(compact('title', 'autho','img', 'content'));
+        $query = $this->connection->prepare("INSERT INTO albums SET  title = :title, author = :author, created_at = NOW()");
+        $query->execute(compact('title', 'author'));
     }
 
     

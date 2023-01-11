@@ -31,7 +31,6 @@ $sql1 = "CREATE TABLE IF NOT EXISTS spotifalsy.albums (
 $sql = "CREATE TABLE IF NOT EXISTS spotifalsy.artists (
     id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     author VARCHAR(30) NOT NULL,
-    name VARCHAR(30) NOT NULL
     )";
 
 if($connection->query($sql1) === TRUE) { // on verifie que la connexion a bien été établie

@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\QueryBuilder;
 use App\Repository\AbstractRepository;
 
 abstract class AbstractsRepository {
@@ -21,11 +22,4 @@ abstract class AbstractsRepository {
         return $this->queryBuilder->select();
     }
 
-    // public function find(int $id): array
-    // {
-    //     $query = $this->db->prepare("SELECT * FROM {$this->table} WHERE id = :id");
-    //     $query->execute(['id' => $id]);
-    //     $item = $query->fetch();
-    //     return $item;
-    // }
 }

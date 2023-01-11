@@ -11,28 +11,20 @@ ini_set('display_errors', 1);
 
 require_once __DIR__ . '/vendor/autoload.php';
 
-
-
-$albumsController = new AlbumsController();
-$albumsController->getAlbums();
-
 // envoyer les donées
-if(!empty($_POST['artists']) or !empty($_POST['albums'])) {
+if(!empty($_POST['title']) and !empty($_POST['author'])) {
     $artist = new Artists(); // object
-    $albums = new Albums();
-    $artist->setName($_POST['name']);
+    $album = new Albums();
 
-    $artistName = $artist->getName();
-    
-    
     $album->setTitle($_POST['title']);
-    $album->setAuthor($artistName);
-    $enVente = $album->getEnVente();
+    $albumTitle = $album->getTitle();  
     
+    $artist->setName($_POST['author']);
+    $artistName = $artist->getName();
 
     $connection = new mysqli('localhost', 'root', 'root', 'spotifalsy'); 
-    $statement = $connection->prepare("INSERT INTO spotifalsy (message, author, date) VALUES (?, ?, NOW())");
-    $statement->bind_param("ss", $enVente, $artistName);
+    $statement = $connection->prepare("INSERT INTO albums (title, author, date) VALUES (?, ?, NOW())");
+    $statement->bind_param("ss", $albumTitle, $artistName);
     $statement->execute();
     $statement->close();
     header('Location: index.php');
@@ -55,7 +47,6 @@ foreach($result as $album) {
 $result->free();
 $connection->close();
 
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -64,37 +55,35 @@ $connection->close();
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-
-    <title>Mon super Chat</title>
+    <link rel="stylesheet" href="style.css">
+    <title>Spotifalsy</title>
 </head>
 <body >
     <div class="container mt-5">
         <div class="row">
             <div class="col-md-8 offset-md-2">
                 <h1 class="text-center mb-3">Bienvenu dans mon Spotifalsy</h1>
+                <h5  class="text-center mb-3">Spotifalsy vous permet d'ajouter des noms d'albums à une liste afin de pouvoir les écouter par la suite.</h5>
+                <h6>Veuiller remplir le formulaire ci-dessous</h6>
                 <form action="" method="post">
                     <div class="form-group m-2">
-                        <textarea class="form-control" name="album" rows="3" placeholder="Your album"></textarea>
+                        <input type="text" class="form-control" name="author" placeholder="Your artist name">
                     </div>
                     <div class="form-group m-2">
-                        <input type="text" class="form-control" name="artist" placeholder="Your artist name">
+                        <input type="text" class="form-control" name="title" placeholder="Your album title">
                     </div>
                     <div class="form-group m-2">
                     <button type="submit" class="btn btn-primary col-12">Send</button>
                     </div>
                 </form>
                 <hr>
-                <h1 class="text-center mb-3">Tous les messages</h1>
-                <div class="messages">
-                    <?php foreach ($albums as $album) : ?>
-                        <div class="card mb-3">
-                            <div class="card-body">
-                                <h5 class="card-title"><?= $album->getAuthor() ?></h5>
-                                <p class="card-text"><?= $album->getTitle() ?></p>
-                            </div>
-                        </div>
-                    <?php endforeach ?>
-                </div>
+                <h2 class="text-center mb-3"> Liste de vos albums à écouter :</h2>
+                <!-- ------------------------------------------------------------ -->
+                
+                <?php foreach ($albums as $album) : ?> 
+                    <p class="card-text"><?="L'artiste '". $album->getAuthor() . "' et son nouvel album intitulé '".$album->getTitle() . "' ont bien été ajoutés à la liste !!"?></p>
+                <?php endforeach ?>
+                <!-- ------------------------------------------------------------ -->
             </div>
         </div>
     </div>
