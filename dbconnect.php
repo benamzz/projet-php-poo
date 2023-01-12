@@ -27,20 +27,8 @@ $sql1 = "CREATE TABLE IF NOT EXISTS spotifalsy.albums (
     date DATETIME NOT NULL
     )";
 
-// table users
-$sql = "CREATE TABLE IF NOT EXISTS spotifalsy.artists (
-    id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    author VARCHAR(30) NOT NULL,
-    )";
-
 if($connection->query($sql1) === TRUE) { // on verifie que la connexion a bien été établie
     echo "La table albums a bien été créée ". PHP_EOL;
-} else { // sinon j'affiche l'erreur
-    echo $connection->error;
-}
-
-if($connection->query($sql) === TRUE) { // on verifie que la connexion a bien été établie
-    echo "La table artists a bien été créée". PHP_EOL;
 } else { // sinon j'affiche l'erreur
     echo $connection->error;
 }

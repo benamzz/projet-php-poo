@@ -24,8 +24,11 @@ if(!empty($_POST['title']) and !empty($_POST['author'])) {
     $albumAuthor = $album->getAuthor();  
     
 
-    $artist->setName($_POST['author']);
-    $artistName = $artist->getName();
+    $artist->setAuthor($_POST['author']);
+    $artistName = $artist->getAuthor();
+
+    $artist->setFavoriteAlbum($_POST['title']);
+    $artistAlbum = $artist->getFavoriteAlbum();
 
     $connection = new mysqli('localhost', 'root', 'root', 'spotifalsy'); 
     $statement = $connection->prepare("INSERT INTO albums (title, author, date) VALUES (?, ?, NOW())");
@@ -82,13 +85,10 @@ $connection->close();
                     </div>
                 </form>
                 <hr>
-                <h2 class="text-center mb-3"> Liste de vos albums à écouter :</h2>
-                <!-- ------------------------------------------------------------ -->
-                
+                <h2 class="text-center mb-3"> Liste de vos albums à écouter :</h2>                
                 <?php foreach ($albums as $album) : ?> 
                     <p class="card-text"><?="L'artiste '". $album->getAuthor() . "' et son nouvel album intitulé '".$album->getTitle() . "' ont bien été ajoutés à la liste !!"?></p>
                 <?php endforeach ?>
-                <!-- ------------------------------------------------------------ -->
             </div>
         </div>
     </div>

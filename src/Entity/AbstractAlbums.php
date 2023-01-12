@@ -5,7 +5,7 @@ namespace App\Entity;
 use DateTime;
 use App\Entity\AbstractAlbums;
 
-abstract class AbstractAlbums
+abstract class AbstractAlbums implements InterfaceArtists
 {
     protected string $author;
     protected string $title;

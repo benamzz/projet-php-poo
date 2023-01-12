@@ -6,18 +6,28 @@ use App\Entity\Artists;
 use App\Interface\InterfaceArtists;
 
 
-class Artists{
+class Artists implements InterfaceArtists{
     
-    private $name;
+    private string $author;
+    private string $favoriteAlbum;
 
-    public function getName() : ?string
+    public function getAuthor() :string
     {
-        return $this->name;
+        return $this->author;
+    }
+    public function setAuthor(string $author) :self
+    {
+        $this->author = $author;
+        return $this;
+    }
+    public function getFavoriteAlbum() : string
+    {
+        return $this->favoriteAlbum;
     }
 
-    public function setName(?string $name) : self
+    public function setFavoriteAlbum(string $favoriteAlbum) : self
     {
-        $this->name = $name;
+        $this->favoriteAlbum = $favoriteAlbum;
         return $this;
     }
 }

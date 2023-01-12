@@ -6,12 +6,8 @@ use App\Interface\InterfaceArtists;
 
 Interface InterfaceArtists{
  
-    public function getName() : string;
+    public function getAuthor() :string;
 
-    public function setName(string $name) : self;
-
-    public function getImg() : string;
-
-    public function setImg(string $img) : self;
+    public function setAuthor(string $author) :self;
 
 }
