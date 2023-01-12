@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use DateTime;
 use App\Entity\AbstractAlbums;
+use App\Interface\InterfaceArtists;
 
 abstract class AbstractAlbums implements InterfaceArtists
 {

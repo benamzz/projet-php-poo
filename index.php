@@ -10,8 +10,7 @@ error_reporting(E_ALL & ~E_NOTICE & ~E_STRICT & ~E_DEPRECATED & ~E_WARNING & ~E_
 ini_set('display_errors', 1);
 
 require_once __DIR__ . '/vendor/autoload.php';
-var_dump($_POST['author']);
-var_dump($_POST['title']);
+
 // envoyer les donées
 if(!empty($_POST['title']) and !empty($_POST['author'])) {
     $artist = new Artists(); // object
