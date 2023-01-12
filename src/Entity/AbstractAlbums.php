@@ -1,28 +1,29 @@
 <?php
 
 namespace App\Entity;
+
 use DateTime;
 use App\Entity\AbstractAlbums;
 
 abstract class AbstractAlbums
 {
-    protected $author;
-    protected $title;
+    protected string $author;
+    protected string $title;
 
-    public function getAuthor()
+    public function getAuthor() :string
     {
         return $this->author;
     }
-    public function setAuthor( $author)
+    public function setAuthor(string $author) :self
     {
         $this->author = $author;
         return $this;
     }
-    public function getTitle()
+    public function getTitle() : string
     {
         return $this->title;
     }
-    public function setTitle($title) 
+    public function setTitle(string $title) :self
     {
         $this->title = $title;
         return $this;

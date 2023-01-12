@@ -10,7 +10,8 @@ error_reporting(E_ALL & ~E_NOTICE & ~E_STRICT & ~E_DEPRECATED & ~E_WARNING & ~E_
 ini_set('display_errors', 1);
 
 require_once __DIR__ . '/vendor/autoload.php';
-
+var_dump($_POST['author']);
+var_dump($_POST['title']);
 // envoyer les donées
 if(!empty($_POST['title']) and !empty($_POST['author'])) {
     $artist = new Artists(); // object
@@ -18,13 +19,17 @@ if(!empty($_POST['title']) and !empty($_POST['author'])) {
 
     $album->setTitle($_POST['title']);
     $albumTitle = $album->getTitle();  
+
+    $album->setAuthor($_POST['author']);
+    $albumAuthor = $album->getAuthor();  
     
+
     $artist->setName($_POST['author']);
     $artistName = $artist->getName();
 
     $connection = new mysqli('localhost', 'root', 'root', 'spotifalsy'); 
     $statement = $connection->prepare("INSERT INTO albums (title, author, date) VALUES (?, ?, NOW())");
-    $statement->bind_param("ss", $albumTitle, $artistName);
+    $statement->bind_param("ss", $albumTitle, $albumAuthor);
     $statement->execute();
     $statement->close();
     header('Location: index.php');

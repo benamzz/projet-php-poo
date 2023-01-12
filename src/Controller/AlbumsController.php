@@ -6,12 +6,10 @@ namespace App\Controller;
 use App\Connection;
 use App\AbstractQueryBuilder;
 use App\Controller\AlbumsController;
-use App\Repository\AbstractRepository;
 
 
 
-
-class AlbumsController{
+class AlbumsController extends AbstractQueryBuilder{
     protected $db;
     protected $table;
     protected $queryBuilder;
